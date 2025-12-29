@@ -1,0 +1,57 @@
+You are a senior full-stack developer with expertise in Next.js, Node.js, React, and video processing.
+
+TASK:
+Create a fully working web application that allows users to download videos from YouTube, TikTok, Instagram, and Facebook without using any external paid API. The project should include both frontend and backend (internal APIs).
+
+REQUIREMENTS:
+
+1. Backend (API):
+   - Create an internal API at /api/download
+   - Accept POST JSON: { "platform": "<youtube|tiktok|instagram|facebook>", "url": "<video_url>" }
+   - Functionality:
+       - YouTube: use `ytdl-core` (Node.js)
+       - TikTok, Instagram, Facebook: use `yt-dlp` (Node.js or call Python process)
+   - Validate the URL
+   - Extract all available video/audio formats and qualities
+   - Return JSON:
+     {
+       title,
+       thumbnail,
+       duration,
+       downloadLinks: [
+         { quality, format, url }
+       ]
+     }
+   - Ensure links are direct and temporary (do not store videos permanently on disk)
+   - Handle errors properly (invalid URL, private video, restricted content)
+
+2. Frontend (Next.js / React):
+   - Homepage contains:
+       - Text input for video URL
+       - Dropdown to select platform (YouTube, TikTok, Instagram, Facebook)
+       - Button labeled "Download Video"
+   - When clicked:
+       - Send POST request to /api/download with platform + URL
+       - Display loader while processing
+       - Show results: video title, thumbnail, duration
+       - Display download links as clickable buttons for each available quality/format
+   - Simple, clean, mobile-friendly design
+
+3. Deployment:
+   - Should run on Firebase Studio / Vercel
+   - Include instructions for installing dependencies (`ytdl-core`, `child_process` for `yt-dlp` if needed)
+   - Include instructions to test the API and integrate frontend
+
+4. Description of the website for users:
+   - Users paste a video URL into the input field
+   - Select the platform of the video
+   - Click "Download Video"
+   - The website shows video information and provides download links in all available qualities/formats
+   - All processing happens on the server via internal APIs; no external API or subscription is required
+
+OUTPUT:
+- Full code for backend API
+- Full code for frontend page/component
+- Installation instructions for all dependencies
+- Instructions on how users can paste URLs and download videos
+- Ensure everything works out-of-the-box on Firebase Studio / Vercel
